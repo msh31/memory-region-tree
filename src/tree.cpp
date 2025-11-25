@@ -8,6 +8,7 @@ void Tree::insert(int value) {
         auto raw_ptr = root.get();
 
         //TODO: account for higher than root
+        //TODO: refactor like search
         while(true) {
             if(value < raw_ptr->value) {
                 if(raw_ptr->left == nullptr) {
@@ -49,29 +50,19 @@ void Tree::printNode(Node* node, const std::string& prefix, bool isLeft) {
 }
 
 bool Tree::search_for(int value) {
-    if(root == nullptr) {
-        return false;
-    } else {
-        auto raw_ptr = root.get();
+    auto raw_ptr = root.get();
 
-        while(true) {
-            if(raw_ptr->value == value) {
-                return true;
-            } else {
-                if(value < raw_ptr->value) {
-                    if(raw_ptr->left == nullptr) {
-                        return false;
-                    } else {
-                        raw_ptr = raw_ptr->left.get();
-                    }
-                } else {
-                    if(raw_ptr->right == nullptr) {
-                        return false;
-                    } else {
-                        raw_ptr = raw_ptr->right.get();
-                    }
-                }
-            }
+    while (raw_ptr != nullptr) {
+        if (raw_ptr->value == value) {
+            return true;
+        }
+
+        if (value < raw_ptr->value) {
+            raw_ptr = raw_ptr->left.get();
+        } else {
+            raw_ptr = raw_ptr->right.get();
         }
     }
+
+    return false;
 }
