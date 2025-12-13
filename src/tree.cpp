@@ -44,7 +44,7 @@ void Tree::printNode(Node* node, const std::string& prefix, bool isLeft) {
     std::cout << prefix;
     std::cout << (isLeft ? "├──" : "└──" );
 
-    std::cout << node->value << std::endl;
+    std::cout << node->value << "\n";
 
     printNode(node->left.get(), prefix + (isLeft ? "│   " : "    "), true);
     printNode(node->right.get(), prefix + (isLeft ? "│   " : "    "), false);
